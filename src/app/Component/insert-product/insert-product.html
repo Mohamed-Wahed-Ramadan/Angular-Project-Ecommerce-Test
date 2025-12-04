@@ -1,0 +1,155 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card p-4">
+        <h2 class="mb-4">{{ editMode ? 'Edit Product' : 'Add New Product' }}</h2>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <!-- Product Name -->
+          <div class="mb-3">
+            <label for="productName" class="form-label">Product Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="productName"
+              formControlName="productName"
+              [class.is-invalid]="submitted && productName?.invalid"
+              [class.is-valid]="submitted && productName?.valid"
+            />
+            @if (submitted && productName?.invalid) {
+              <div class="invalid-feedback d-block">
+                @if (productName?.hasError('required')) {
+                  <div class="alert alert-danger p-2 mb-1">Product Name is required</div>
+                }
+                @if (productName?.hasError('minlength')) {
+                  <div class="alert alert-danger p-2 mb-1">Minimum 3 characters required</div>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Product Price -->
+          <div class="mb-3">
+            <label for="productPrice" class="form-label">Price</label>
+            <input
+              type="number"
+              class="form-control"
+              id="productPrice"
+              formControlName="productPrice"
+              [class.is-invalid]="submitted && productPrice?.invalid"
+              [class.is-valid]="submitted && productPrice?.valid"
+            />
+            @if (submitted && productPrice?.invalid) {
+              <div class="invalid-feedback d-block">
+                <div class="alert alert-danger p-2 mb-1">Price is required and must be > 0</div>
+              </div>
+            }
+          </div>
+
+          <!-- Discount -->
+          <div class="mb-3">
+            <label for="discount" class="form-label">Discount (%)</label>
+            <input
+              type="number"
+              class="form-control"
+              id="discount"
+              formControlName="discount"
+              [class.is-invalid]="submitted && discount?.invalid"
+              [class.is-valid]="submitted && discount?.valid"
+            />
+            @if (submitted && discount?.invalid) {
+              <div class="invalid-feedback d-block">
+                <div class="alert alert-danger p-2 mb-1">Discount must be between 0-100</div>
+              </div>
+            }
+          </div>
+
+          <!-- Quantity -->
+          <div class="mb-3">
+            <label for="productQuantity" class="form-label">Quantity</label>
+            <input
+              type="number"
+              class="form-control"
+              id="productQuantity"
+              formControlName="productQuantity"
+              [class.is-invalid]="submitted && productQuantity?.invalid"
+              [class.is-valid]="submitted && productQuantity?.valid"
+            />
+            @if (submitted && productQuantity?.invalid) {
+              <div class="invalid-feedback d-block">
+                <div class="alert alert-danger p-2 mb-1">Quantity is required</div>
+              </div>
+            }
+          </div>
+
+          <!-- Category -->
+          <div class="mb-3">
+            <label for="catatId" class="form-label">Category</label>
+            <select
+              class="form-control"
+              id="catatId"
+              formControlName="catatId"
+              [class.is-invalid]="submitted && catatId?.invalid"
+              [class.is-valid]="submitted && catatId?.valid"
+            >
+              <option value="">Select a category</option>
+              @for (cat of categories; track cat.id) {
+                <option [value]="cat.id">{{ cat.name }}</option>
+              }
+            </select>
+            @if (submitted && catatId?.invalid) {
+              <div class="invalid-feedback d-block">
+                <div class="alert alert-danger p-2 mb-1">Category is required</div>
+              </div>
+            }
+          </div>
+
+          <!-- Image URL -->
+          <div class="mb-3">
+            <label for="productImgURl" class="form-label">Image URL</label>
+            <input
+              type="text"
+              class="form-control"
+              id="productImgURl"
+              formControlName="productImgURl"
+              [class.is-invalid]="submitted && productImgURl?.invalid"
+              [class.is-valid]="submitted && productImgURl?.valid"
+            />
+            @if (submitted && productImgURl?.invalid) {
+              <div class="invalid-feedback d-block">
+                <div class="alert alert-danger p-2 mb-1">Image URL is required</div>
+              </div>
+            }
+          </div>
+
+          <!-- Details -->
+          <div class="mb-3">
+            <label for="productsDetails" class="form-label">Details</label>
+            <textarea
+              class="form-control"
+              id="productsDetails"
+              formControlName="productsDetails"
+              rows="3"
+              [class.is-invalid]="submitted && productsDetails?.invalid"
+              [class.is-valid]="submitted && productsDetails?.valid"
+            ></textarea>
+            @if (submitted && productsDetails?.invalid) {
+              <div class="invalid-feedback d-block">
+                <div class="alert alert-danger p-2 mb-1">Details are required</div>
+              </div>
+            }
+          </div>
+
+          <!-- Buttons -->
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">
+              {{ editMode ? 'Update Product' : 'Add Product' }}
+            </button>
+            <button type="button" class="btn btn-secondary" (click)="router.navigate(['/products'])">
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

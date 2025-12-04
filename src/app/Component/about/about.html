@@ -1,0 +1,53 @@
+<div class="container mt-5">
+  <div class="row mb-5">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="mb-4">About {{ company.name }}</h1>
+      <p class="lead">{{ company.description }}</p>
+    </div>
+  </div>
+
+  <div class="row mb-5">
+    <div class="col-md-6">
+      <div class="info-card p-4 bg-light rounded">
+        <h3>Our Mission</h3>
+        <p>{{ company.mission }}</p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="info-card p-4 bg-light rounded">
+        <h3>Our Vision</h3>
+        <p>{{ company.vision }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-5">
+    <div class="col-12">
+      <h2 class="mb-4">Meet Our Team</h2>
+      <div class="row">
+        @for(member of team; track $index) {
+          <div class="col-md-6 mb-4">
+            <div class="card team-card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">{{ member.name }}</h5>
+                <p class="card-subtitle text-muted">{{ member.role }}</p>
+                <p class="card-text">Specializes in: <strong>{{ member.specialty }}</strong></p>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <div class="footer-info p-4 bg-info text-white rounded">
+        <h4>Contact Us</h4>
+        <p>Email: info@ourstore.com</p>
+        <p>Phone: +1 (555) 123-4567</p>
+        <p>Address: 123 Commerce Street, Business City, BC 12345</p>
+      </div>
+    </div>
+  </div>
+</div>

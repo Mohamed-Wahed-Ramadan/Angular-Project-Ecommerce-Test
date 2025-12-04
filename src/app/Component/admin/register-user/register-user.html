@@ -1,0 +1,113 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card p-4">
+        <h2 class="mb-4">User Registration</h2>
+        <form (ngSubmit)="onSubmit()" #form="ngForm">
+          <!-- Full Name -->
+          <div class="mb-3">
+            <label for="fullName" class="form-label">Full Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="fullName"
+              [(ngModel)]="user.fullName"
+              name="fullName"
+              [class.is-invalid]="submitted && getFieldErrors('fullName').length > 0"
+              [class.is-valid]="submitted && getFieldErrors('fullName').length === 0 && user.fullName"
+            />
+            @if (submitted && getFieldErrors('fullName').length > 0) {
+              <div class="invalid-feedback d-block">
+                @for (error of getFieldErrors('fullName'); track $index) {
+                  <div class="alert alert-danger alert-sm p-2 mb-1">{{ error }}</div>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Email -->
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              [(ngModel)]="user.email"
+              name="email"
+              [class.is-invalid]="submitted && getFieldErrors('email').length > 0"
+              [class.is-valid]="submitted && getFieldErrors('email').length === 0 && user.email"
+            />
+            @if (submitted && getFieldErrors('email').length > 0) {
+              <div class="invalid-feedback d-block">
+                @for (error of getFieldErrors('email'); track $index) {
+                  <div class="alert alert-danger alert-sm p-2 mb-1">{{ error }}</div>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Mobile Numbers -->
+          <div class="mb-3">
+            <label class="form-label">Mobile Numbers</label>
+            @for (mobile of user.mobileNumbers; track $index) {
+              <div class="input-group mb-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="user.mobileNumbers[$index]"
+                  name="mobile_{{ $index }}"
+                  placeholder="10-digit number"
+                  [class.is-invalid]="submitted && getMobileErrors($index).length > 0"
+                  [class.is-valid]="submitted && getMobileErrors($index).length === 0 && user.mobileNumbers[$index]"
+                />
+                @if (user.mobileNumbers.length > 1) {
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    (click)="removeMobileNumber($index)"
+                  >
+                    Remove
+                  </button>
+                }
+              </div>
+              @if (submitted && getMobileErrors($index).length > 0) {
+                <div class="invalid-feedback d-block">
+                  @for (error of getMobileErrors($index); track $index) {
+                    <div class="alert alert-danger alert-sm p-2 mb-1">{{ error }}</div>
+                  }
+                </div>
+              }
+            }
+            <button type="button" class="btn btn-secondary btn-sm" (click)="addMobileNumber()">
+              Add another mobile
+            </button>
+          </div>
+
+          <!-- Password -->
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              [(ngModel)]="user.password"
+              name="password"
+              [class.is-invalid]="submitted && getFieldErrors('password').length > 0"
+              [class.is-valid]="submitted && getFieldErrors('password').length === 0 && user.password"
+            />
+            @if (submitted && getFieldErrors('password').length > 0) {
+              <div class="invalid-feedback d-block">
+                @for (error of getFieldErrors('password'); track $index) {
+                  <div class="alert alert-danger alert-sm p-2 mb-1">{{ error }}</div>
+                }
+              </div>
+            }
+          </div>
+
+          <!-- Submit Button -->
+          <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<table class="table table-bordered mt-5">
+  <thead>
+    <tr>
+      <th>اسم المنتج</th>
+      <th>الكمية</th>
+      <th>السعر</th>
+      <th>إزالة</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for(item of cart; track item.product.id) {
+      <tr>
+        <td>{{ item.product.productName }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>{{ item.product.productPrice * item.quantity | currency:'USD' }}</td>
+        <td>
+          <button class="btn btn-info btn-sm me-2" (click)="goToDetails(item.product.id)">تفاصيل</button>
+          <button class="btn btn-danger btn-sm" (click)="removeItem(item.product.id)">إزالة</button>
+        </td>
+      </tr>
+    }
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="2"><strong>الإجمالي</strong></td>
+      <td colspan="2"><strong>{{ getTotal() | currency:'USD' }}</strong></td>
+    </tr>
+  </tfoot>
+</table>

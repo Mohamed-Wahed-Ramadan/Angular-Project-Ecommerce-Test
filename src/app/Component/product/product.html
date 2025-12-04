@@ -1,0 +1,104 @@
+<div class="container">
+  <!-- Search Component -->
+  <div class="row mb-4">
+    <div class="col-12">
+      <app-search [searchValue]="searchQuery" (searchChange)="onSearchChange($event)"></app-search>
+    </div>
+  </div>
+
+  <!-- Display Current Date using Date Pipe -->
+  <div class="row mb-3">
+    <div class="col-12">
+      <p class="text-muted">Current Date: <strong>{{ currentDate | date: 'fullDate' }}</strong></p>
+    </div>
+  </div>
+
+  <!-- Display Credit Card Number using Custom Pipe -->
+  <div class="row mb-3">
+    <div class="col-12">
+      <p class="text-muted">Card Number: <strong>{{ cardNumber | creditCard }}</strong></p>
+    </div>
+  </div>
+
+  <!-- Display Total Price using Currency Pipe -->
+  <!-- <div class="row mb-4">
+    <div class="col-12">
+      <p class="text-info"><strong>Total Price: {{ getTotalPrice() | currency: 'USD' }}</strong></p>
+    </div>
+  </div> -->
+
+  <div class="row">
+    @for(items of filteredProducts; track items.id){
+    <div class="col-3 mb-4">
+      <div class="card navy-card"
+           appProductCard
+           [ngClass]="{'bg-yellow-quantity': items.productQuantity === 1}"
+           [style.background-color]="items.productQuantity === 1 ? '#FFD700' : 'white'"
+           [class.default-bg]="items.productQuantity > 1">
+        <img [src]="items.productImgURl" class="card-img-top" alt="{{items.productName}}" />
+        <div class="card-body">
+          <h5 class="card-title">{{ items.productName }}</h5>
+          <p class="price">
+            <span style="text-decoration: line-through; color: #888;">{{ items.productPrice | currency:'USD' }}</span>
+            <span style="color: #FFD700; font-weight: bold; margin-right:8px;">
+              {{ items.productPrice | discount:items.discount | currency:'USD' }}
+            </span>
+            <span class="badge bg-warning text-dark">خصم {{ items.discount }}%</span>
+          </p>
+          <p class="quantity">Quantity: {{ items.productQuantity }}</p>
+          
+          @switch (items.productQuantity) { 
+            @case (0) {
+              <p class="status out-of-stock">Out of Stock</p>
+            } 
+            @case (1) {
+              <p class="status last-one">Last One Item!</p>
+            } 
+            @case (2) {
+              <p class="status last-two">Last Two Items!</p>
+            } 
+            @default {
+              <p class="status in-stock">In Stock</p>
+            } 
+          }
+
+          <button 
+            (click)="addtocart(items)" 
+            class="btn btn-navy" 
+            [disabled]="items.productQuantity === 0">
+            Add to Cart
+          </button>
+
+          <button 
+            (click)="buyProduct(items)" 
+            class="btn btn-success mt-2" 
+            [disabled]="items.productQuantity === 0">
+            Buy Now
+          </button>
+
+          <button 
+            (click)="editProduct(items.id)" 
+            class="btn btn-warning mt-2">
+            Edit
+          </button>
+
+          <button 
+            (click)="deleteProduct(items.id)" 
+            class="btn btn-danger mt-2">
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+    } @empty {
+      <p class="text-danger text-center">No products available</p>
+    }
+  </div>
+
+  <!-- Cart Component -->
+  <div class="row">
+    <div class="col-12">
+      <app-cart [cart]="cart" (remove)="removeFromCart($event)"></app-cart>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="list-group">
+        @for (link of adminLinks; track link.route) {
+          <a [routerLink]="link.route" class="list-group-item list-group-item-action">
+            {{ link.label }}
+          </a>
+        }
+      </div>
+    </div>
+    <div class="col-md-9">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

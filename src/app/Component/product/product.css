@@ -1,0 +1,157 @@
+/* ألوان كحلي فاتح */
+        :root {
+            --light-beige: #f5f1e6;
+            --beige-primary: #e8dfca;
+            --beige-medium: #d4c9b0;
+            --beige-dark: #a89f8a;
+            --accent-brown: #8b7355;
+            --dark-brown: #5d4c3c;
+            --text-dark: #3e3a34;
+        }
+
+        body {
+            background-color: var(--light-beige);
+            color: var(--text-dark);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .beige-card {
+            border: 2px solid var(--beige-medium);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(93, 76, 60, 0.1);
+            height: 100%;
+        }
+
+        .beige-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(93, 76, 60, 0.2);
+            border-color: var(--accent-brown);
+        }
+
+        .card-img-container {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            border-bottom: 3px solid var(--beige-medium);
+        }
+
+        .beige-card:hover .card-img-top {
+            transform: scale(1.1);
+        }
+
+        .card-body {
+            padding: 20px;
+            background: linear-gradient(to bottom, white 0%, var(--beige-primary) 100%);
+        }
+
+        .card-title {
+            color: var(--dark-brown);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            min-height: 50px;
+        }
+
+        .price {
+            color: var(--accent-brown);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+        }
+
+        .quantity {
+            color: var(--beige-dark);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        /* Status Styles */
+        .status {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .out-of-stock {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .last-one {
+            background-color: #ffc107;
+            color: var(--text-dark);
+        }
+
+        .last-two {
+            background-color: #fd7e14;
+            color: white;
+        }
+
+        .in-stock {
+            background-color: #28a745;
+            color: white;
+        }
+
+        /* Button Styles */
+        .btn-beige {
+            background-color: var(--accent-brown);
+            border: 2px solid var(--accent-brown);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: bold;
+            width: 100%;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .btn-beige:hover:not(:disabled) {
+            background-color: var(--dark-brown);
+            border-color: var(--dark-brown);
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(93, 76, 60, 0.3);
+        }
+
+        .btn-beige:active:not(:disabled) {
+            background-color: var(--text-dark);
+            transform: scale(0.98);
+        }
+
+        .btn-beige:disabled {
+            background-color: #a89f8a;
+            border-color: #a89f8a;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .col-3 {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+
+        @media (min-width: 769px) and (max-width: 992px) {
+            .col-3 {
+                flex: 0 0 50%;
+                max-width: 50%;
+            }
+        }

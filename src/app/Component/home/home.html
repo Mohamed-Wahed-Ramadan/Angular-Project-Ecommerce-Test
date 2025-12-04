@@ -1,0 +1,22 @@
+<div class="container mt-5">
+  <div class="jumbotron mb-5 p-5 bg-light rounded-lg">
+    <h1 class="display-4">{{ title }}</h1>
+    <p class="lead">{{ description }}</p>
+    <hr class="my-4">
+    <p>Explore our wide range of products and find exactly what you're looking for!</p>
+  </div>
+
+  <div class="row">
+    @for(feature of features; track $index) {
+      <div class="col-md-6 mb-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body text-center">
+            <div class="feature-icon mb-3" style="font-size: 3rem;">{{ feature.icon }}</div>
+            <h5 class="card-title">{{ feature.title }}</h5>
+            <p class="card-text">{{ feature.description }}</p>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>
